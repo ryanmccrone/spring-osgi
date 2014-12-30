@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.SortedSet;
 
 import junit.framework.TestCase;
+
 import org.easymock.MockControl;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
@@ -32,7 +33,8 @@ import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.osgi.mock.MockBundleContext;
-import org.springframework.osgi.service.importer.support.ImportContextClassLoader;
+import org.springframework.osgi.service.importer.support.Availability;
+import org.springframework.osgi.service.importer.support.ImportContextClassLoaderEnum;
 import org.springframework.osgi.service.importer.support.OsgiServiceCollectionProxyFactoryBean;
 import org.springframework.osgi.service.importer.support.OsgiServiceProxyFactoryBean;
 import org.springframework.util.ReflectionUtils;
@@ -91,14 +93,14 @@ public class OsgiServiceAnnotationTest extends TestCase {
 			new Class<?>[] { AnnotatedBean.class });
 		ServiceReference ref = AnnotationUtils.getAnnotation(setter, ServiceReference.class);
 		processor.getServiceProperty(pfb, ref, setter, null);
-		assertTrue(pfb.getCardinality().isMandatory());
+		assertTrue(pfb.getAvailability() == Availability.MANDATORY);
 
 		setter = AnnotatedBean.class.getMethod("setAnnotatedBeanTypeWithCardinality0_1",
 			new Class<?>[] { AnnotatedBean.class });
 		ref = AnnotationUtils.getAnnotation(setter, ServiceReference.class);
 		pfb = new OsgiServiceProxyFactoryBean();
 		processor.getServiceProperty(pfb, ref, setter, null);
-		assertFalse(pfb.getCardinality().isMandatory());
+		assertFalse(pfb.getAvailability() == Availability.MANDATORY);
 	}
 
 	public void testProperMultiCardinality() throws Exception {
@@ -108,14 +110,14 @@ public class OsgiServiceAnnotationTest extends TestCase {
 			new Class<?>[] { List.class });
 		ServiceReference ref = AnnotationUtils.getAnnotation(setter, ServiceReference.class);
 		processor.getServiceProperty(pfb, ref, setter, null);
-		assertFalse(pfb.getCardinality().isMandatory());
+		assertFalse(pfb.getAvailability() == Availability.MANDATORY);
 
 		setter = AnnotatedBean.class.getMethod("setAnnotatedBeanTypeWithCardinality1_N",
 			new Class<?>[] { SortedSet.class });
 		ref = AnnotationUtils.getAnnotation(setter, ServiceReference.class);
 		pfb = new OsgiServiceCollectionProxyFactoryBean();
 		processor.getServiceProperty(pfb, ref, setter, null);
-		assertTrue(pfb.getCardinality().isMandatory());
+		assertTrue(pfb.getAvailability() == Availability.MANDATORY);
 	}
 
 	public void testErrorMultiCardinality() throws Exception {
@@ -139,7 +141,7 @@ public class OsgiServiceAnnotationTest extends TestCase {
 			new Class<?>[] { AnnotatedBean.class });
 		ServiceReference ref = AnnotationUtils.getAnnotation(setter, ServiceReference.class);
 		processor.getServiceProperty(pfb, ref, setter, null);
-		assertEquals(pfb.getContextClassLoader(), ImportContextClassLoader.CLIENT);
+		assertEquals(pfb.getImportContextClassLoader(), ImportContextClassLoaderEnum.CLIENT);
 
 		pfb = new OsgiServiceProxyFactoryBean();
 		setter = AnnotatedBean.class.getMethod("setAnnotatedBeanTypeWithClassLoaderUmanaged",
@@ -147,14 +149,14 @@ public class OsgiServiceAnnotationTest extends TestCase {
 		ref = AnnotationUtils.getAnnotation(setter, ServiceReference.class);
 		processor.getServiceProperty(pfb, ref, setter, null);
 
-		assertEquals(pfb.getContextClassLoader(), ImportContextClassLoader.UNMANAGED);
+		assertEquals(pfb.getImportContextClassLoader(), ImportContextClassLoaderEnum.UNMANAGED);
 
 		pfb = new OsgiServiceProxyFactoryBean();
 		setter = AnnotatedBean.class.getMethod("setAnnotatedBeanTypeWithClassLoaderServiceProvider",
 			new Class<?>[] { AnnotatedBean.class });
 		ref = AnnotationUtils.getAnnotation(setter, ServiceReference.class);
 		processor.getServiceProperty(pfb, ref, setter, null);
-		assertEquals(pfb.getContextClassLoader(), ImportContextClassLoader.SERVICE_PROVIDER);
+		assertEquals(pfb.getImportContextClassLoader(), ImportContextClassLoaderEnum.SERVICE_PROVIDER);
 	}
 
 	public void testGetServicePropertyBeanName() throws Exception {
@@ -199,8 +201,8 @@ public class OsgiServiceAnnotationTest extends TestCase {
 		String filter = (String) getPrivateProperty(pfb, "filter");
 		String beanName = (String) getPrivateProperty(pfb, "serviceBeanName");
 		assertEquals(intfs[0], AnnotatedBean.class);
-		assertFalse(pfb.getCardinality().isMandatory());
-		assertEquals(ImportContextClassLoader.SERVICE_PROVIDER, pfb.getContextClassLoader());
+		assertFalse(pfb.getAvailability() == Availability.MANDATORY);
+		assertEquals(ImportContextClassLoaderEnum.SERVICE_PROVIDER, pfb.getImportContextClassLoader());
 		assertEquals(filter, "(id=fooey)");
 		assertEquals(beanName, "myBean");
 	}

@@ -41,10 +41,10 @@ public class GenericsTest extends TestCase {
 		}
 	}
 
-	public void testRawType() throws Exception {
-		assertSame(null, GenericTypeResolver.resolveTypeArgument(RawListener.class,
-				OsgiBundleApplicationContextListener.class));
-	}
+//	public void testRawType() throws Exception {
+//		assertSame(null, GenericTypeResolver.resolveTypeArgument(RawListener.class,
+//				OsgiBundleApplicationContextListener.class));
+//	}
 
 	public void testGenericType() throws Exception {
 		assertSame(OsgiBundleApplicationContextEvent.class, GenericTypeResolver.resolveTypeArgument(

@@ -28,7 +28,7 @@ import org.springframework.osgi.context.event.OsgiBundleApplicationContextEventM
 import org.springframework.osgi.extender.internal.dependencies.startup.MandatoryImporterDependencyFactory;
 import org.springframework.osgi.extender.support.DefaultOsgiApplicationContextCreator;
 import org.springframework.osgi.mock.MockBundleContext;
-import org.springframework.scheduling.timer.TimerTaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
  * @author Costin Leau
@@ -54,7 +54,7 @@ public class ExtenderConfigurationDefaultSettingsTest extends TestCase {
 
 	public void testShutdownTaskExecutor() throws Exception {
 		TaskExecutor executor = config.getShutdownTaskExecutor();
-		assertTrue(executor instanceof TimerTaskExecutor);
+		assertTrue("Executor not the write type.  Encountered " + executor.getClass().getSuperclass(), executor instanceof ThreadPoolTaskScheduler);
 	}
 
 	public void testEventMulticaster() throws Exception {

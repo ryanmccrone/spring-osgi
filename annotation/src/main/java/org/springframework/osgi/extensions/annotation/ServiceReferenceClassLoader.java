@@ -16,7 +16,7 @@
 
 package org.springframework.osgi.extensions.annotation;
 
-import org.springframework.osgi.service.importer.support.ImportContextClassLoader;
+import org.springframework.osgi.service.importer.support.ImportContextClassLoaderEnum;
 
 /**
  * Spring-DM managed OSGi service <code>ClassLoader</code> property.
@@ -24,21 +24,21 @@ import org.springframework.osgi.service.importer.support.ImportContextClassLoade
  * @author Andy Piper
  */
 public enum ServiceReferenceClassLoader {
-	CLIENT(ImportContextClassLoader.CLIENT), SERVICE_PROVIDER(ImportContextClassLoader.SERVICE_PROVIDER), UNMANAGED(
-			ImportContextClassLoader.UNMANAGED);
+	CLIENT(ImportContextClassLoaderEnum.CLIENT), SERVICE_PROVIDER(ImportContextClassLoaderEnum.SERVICE_PROVIDER), UNMANAGED(
+			ImportContextClassLoaderEnum.UNMANAGED);
 
-	private ImportContextClassLoader icclValue;
+	private ImportContextClassLoaderEnum icclValue;
 
 
-	private ServiceReferenceClassLoader(ImportContextClassLoader iccl) {
+	private ServiceReferenceClassLoader(ImportContextClassLoaderEnum iccl) {
 		icclValue = iccl;
 	}
 
 	public String toString() {
-		return icclValue.getLabel();
+		return icclValue.name();
 	}
 
-	public ImportContextClassLoader toImportContextClassLoader() {
+	public ImportContextClassLoaderEnum toImportContextClassLoader() {
 		return icclValue;
 	}
 }

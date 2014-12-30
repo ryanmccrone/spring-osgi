@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.SortedSet;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.osgi.service.importer.support.Availability;
 
 /**
  * @author Andy Piper
@@ -78,7 +79,7 @@ public class AnnotatedBean {
 		return annotatedBeanTypeComplex;
 	}
 
-	@ServiceReference(serviceBeanName = "myBean", cardinality = ServiceReferenceCardinality.C0__1,
+	@ServiceReference(serviceBeanName = "myBean", availability = Availability.OPTIONAL,
 		contextClassLoader = ServiceReferenceClassLoader.SERVICE_PROVIDER, timeout = 100, filter =  "(id=fooey)")
 	public void setAnnotatedBeanTypeComplex(AnnotatedBean annotatedBeanTypeComplex) {
 		this.annotatedBeanTypeComplex = annotatedBeanTypeComplex;
@@ -97,7 +98,7 @@ public class AnnotatedBean {
 		return annotatedBeanTypeWithCardinality1_1;
 	}
 
-	@ServiceReference(cardinality = ServiceReferenceCardinality.C1__1)
+	@ServiceReference(availability = Availability.MANDATORY)
 	public void setAnnotatedBeanTypeWithCardinality1_1(AnnotatedBean annotatedBeanTypeWithCardinality1_1) {
 		this.annotatedBeanTypeWithCardinality1_1 = annotatedBeanTypeWithCardinality1_1;
 	}
@@ -106,7 +107,7 @@ public class AnnotatedBean {
 		return annotatedBeanTypeWithCardinality0_1;
 	}
 
-	@ServiceReference(cardinality = ServiceReferenceCardinality.C0__1)
+	@ServiceReference(availability = Availability.OPTIONAL)
 	public void setAnnotatedBeanTypeWithCardinality0_1(AnnotatedBean annotatedBeanTypeWithCardinality0_1) {
 		this.annotatedBeanTypeWithCardinality0_1 = annotatedBeanTypeWithCardinality0_1;
 	}
@@ -115,7 +116,7 @@ public class AnnotatedBean {
 		return annotatedBeanTypeWithCardinality0_N;
 	}
 
-	@ServiceReference(cardinality = ServiceReferenceCardinality.C0__N, serviceTypes = AnnotatedBean.class)
+	@ServiceReference(availability = Availability.OPTIONAL, serviceTypes = AnnotatedBean.class)
 	public void setAnnotatedBeanTypeWithCardinality0_N(List<AnnotatedBean> annotatedBeanTypeWithCardinality0_N) {
 		this.annotatedBeanTypeWithCardinality0_N = annotatedBeanTypeWithCardinality0_N;
 	}
@@ -124,7 +125,7 @@ public class AnnotatedBean {
 		return annotatedBeanErrorTypeWithCardinality1_N;
 	}
 
-	@ServiceReference(cardinality = ServiceReferenceCardinality.C1__N)
+	@ServiceReference(availability = Availability.MANDATORY)
 	public void setAnnotatedBeanErrorTypeWithCardinality1_N(SortedSet<AnnotatedBean> annotatedBeanTypeWithCardinality1_N) {
 		this.annotatedBeanErrorTypeWithCardinality1_N = annotatedBeanTypeWithCardinality1_N;
 	}
@@ -133,7 +134,7 @@ public class AnnotatedBean {
         return annotatedBeanTypeWithCardinality1_N;
     }
 
-    @ServiceReference(cardinality = ServiceReferenceCardinality.C1__N, serviceTypes = AnnotatedBean.class)
+    @ServiceReference(availability = Availability.MANDATORY, serviceTypes = AnnotatedBean.class)
     public void setAnnotatedBeanTypeWithCardinality1_N(SortedSet<AnnotatedBean> annotatedBeanTypeWithCardinality1_N) {
         this.annotatedBeanTypeWithCardinality1_N = annotatedBeanTypeWithCardinality1_N;
     }

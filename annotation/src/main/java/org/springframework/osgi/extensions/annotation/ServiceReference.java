@@ -22,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.springframework.osgi.service.importer.support.Availability;
+
 /**
  * Marks a method (typically a JavaBean setter method) as requiring an OSGi service reference.
  * 
@@ -36,11 +38,8 @@ public @interface ServiceReference {
 	 * The name of the bean that backs the injected service. May be null.
 	 */
 	String serviceBeanName() default "";
-
-	/**
-	 * The cardinality of the service reference, defaults to mandatory.
-	 */
-	ServiceReferenceCardinality cardinality() default ServiceReferenceCardinality.C1__1;
+	
+	Availability availability() default Availability.MANDATORY;
 
     /**
 	 * The invocation context classloader setting. Defalts to the classloader of the client.

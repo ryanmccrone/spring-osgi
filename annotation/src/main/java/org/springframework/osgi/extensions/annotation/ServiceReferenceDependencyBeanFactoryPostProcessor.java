@@ -21,6 +21,7 @@ import org.springframework.osgi.extender.OsgiServiceDependencyFactory;
 import org.springframework.osgi.service.exporter.OsgiServicePropertiesResolver;
 import org.springframework.osgi.service.exporter.support.OsgiServiceFactoryBean;
 import org.springframework.osgi.service.importer.OsgiServiceDependency;
+import org.springframework.osgi.service.importer.support.Availability;
 import org.springframework.osgi.service.importer.support.OsgiServiceProxyFactoryBean;
 import org.springframework.osgi.service.importer.support.OsgiServiceCollectionProxyFactoryBean;
 import org.springframework.osgi.util.OsgiFilterUtils;
@@ -32,7 +33,7 @@ import org.springframework.util.ReflectionUtils;
  *
  * @author Andy Piper
  */
-class ServiceReferenceDependencyBeanFactoryPostProcessor implements OsgiServiceDependencyFactory {
+public class ServiceReferenceDependencyBeanFactoryPostProcessor implements OsgiServiceDependencyFactory {
 
 	private static Log logger = LogFactory.getLog(ServiceReferenceDependencyBeanFactoryPostProcessor.class);
 
@@ -96,7 +97,7 @@ class ServiceReferenceDependencyBeanFactoryPostProcessor implements OsgiServiceD
 							}
 
 							public boolean isMandatory() {
-								return s.cardinality().toCardinality().isMandatory();
+								return s.availability() == Availability.MANDATORY;
 							}
 
 							public String getBeanName() {

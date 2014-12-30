@@ -24,7 +24,10 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
-import java.util.Timer;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadFactory;
 
 import org.apache.commons.logging.Log;
 import org.osgi.framework.Bundle;
@@ -46,7 +49,7 @@ import org.springframework.osgi.extender.internal.dependencies.startup.Mandatory
 import org.springframework.osgi.extender.support.DefaultOsgiApplicationContextCreator;
 import org.springframework.osgi.extender.support.internal.ConfigUtils;
 import org.springframework.osgi.util.BundleDelegatingClassLoader;
-import org.springframework.scheduling.timer.TimerTaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
@@ -371,13 +374,24 @@ public class ExtenderConfiguration implements DisposableBean {
 	}
 
 	private TaskExecutor createDefaultShutdownTaskExecutor() {
-		TimerTaskExecutor taskExecutor = new TimerTaskExecutor() {
-			@Override
-			protected Timer createTimer() {
-				return new Timer("Spring DM context shutdown thread", true);
+		ThreadPoolTaskScheduler taskExecutor = new ThreadPoolTaskScheduler(){
+			private static final long serialVersionUID = 1L;
+
+			protected ScheduledExecutorService createExecutor(
+					int poolSize, final ThreadFactory threadFactory, RejectedExecutionHandler rejectedExecutionHandler) {
+				
+				ThreadFactory tf = new ThreadFactory(){
+					public Thread newThread(Runnable r) {
+						Thread t = threadFactory.newThread(r);
+						t.setName("Spring DM context shutdown thread");
+						return t;
+					}
+					
+				};
+				
+				return new ScheduledThreadPoolExecutor(poolSize, tf, rejectedExecutionHandler);
 			}
 		};
-
 		taskExecutor.afterPropertiesSet();
 		isShutdownTaskExecutorManagedInternally = true;
 		return taskExecutor;

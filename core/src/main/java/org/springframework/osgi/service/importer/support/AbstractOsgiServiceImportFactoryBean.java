@@ -161,18 +161,18 @@ public abstract class AbstractOsgiServiceImportFactoryBean implements FactoryBea
 		this.interfaces = interfaces;
 	}
 
-//	/**
-//	 * Sets the thread context class loader management strategy to use for services imported by this service. By default
-//	 * {@link ImportContextClassLoader#CLIENT} is used.
-//	 * 
-//	 * @param contextClassLoader import context class loader management strategy
-//	 * @see ImportContextClassLoader
-//	 * @deprecated As of Spring DM 2.0, replaced by {@link #setImportContextClassLoader(ImportContextClassLoaderEnum))}
-//	 */
-//	public void setContextClassLoader(ImportContextClassLoader contextClassLoader) {
-//		Assert.notNull(contextClassLoader);
-//		this.contextClassLoader = contextClassLoader.getImportContextClassLoaderEnum();
-//	}
+	/**
+	 * Sets the thread context class loader management strategy to use for services imported by this service. By default
+	 * {@link ImportContextClassLoader#CLIENT} is used.
+	 * 
+	 * @param contextClassLoader import context class loader management strategy
+	 * @see ImportContextClassLoader
+	 * @deprecated As of Spring DM 2.0, replaced by {@link #setImportContextClassLoader(ImportContextClassLoaderEnum))}
+	 */
+	public void setContextClassLoader(ImportContextClassLoaderEnum contextClassLoader) {
+		Assert.notNull(contextClassLoader);
+		this.contextClassLoader = contextClassLoader;
+	}
 
 	/**
 	 * Sets the thread context class loader management strategy to use for services imported by this service. By default
