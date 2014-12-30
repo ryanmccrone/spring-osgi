@@ -28,7 +28,6 @@ import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.BeanReferenceFactoryBean;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -56,6 +55,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import backward.OsgiBeanReferenceFactoryBean;
 
 /**
  * Base class for parsing reference declarations. Contains common functionality such as adding listeners (and their
@@ -220,7 +221,7 @@ public abstract class AbstractReferenceDefinitionParser extends AbstractBeanDefi
 
 	private AbstractBeanDefinition createBeanReferenceDefinition(String beanName, BeanDefinition actualDef) {
 		GenericBeanDefinition def = new GenericBeanDefinition();
-		def.setBeanClass(BeanReferenceFactoryBean.class);
+		def.setBeanClass(OsgiBeanReferenceFactoryBean.class);
 		def.setAttribute(GENERATED_REF, Boolean.TRUE);
 		def.setOriginatingBeanDefinition(actualDef);
 		def.setDependsOn(new String[] { beanName });

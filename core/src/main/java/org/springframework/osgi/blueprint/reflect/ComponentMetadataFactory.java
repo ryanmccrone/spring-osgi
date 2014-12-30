@@ -31,12 +31,13 @@ import org.springframework.beans.PropertyValue;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.BeanReferenceFactoryBean;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.config.ConstructorArgumentValues.ValueHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.osgi.config.internal.AbstractReferenceDefinitionParser;
+
+import backward.OsgiBeanReferenceFactoryBean;
 
 /**
  * Internal class used for adapting Spring's bean definition to OSGi Blueprint metadata. Used by {@link MetadataFactory}
@@ -47,7 +48,7 @@ import org.springframework.osgi.config.internal.AbstractReferenceDefinitionParse
  */
 class ComponentMetadataFactory implements MetadataConstants {
 
-	private static final String BEAN_REF_FB_CLASS_NAME = BeanReferenceFactoryBean.class.getName();
+	private static final String BEAN_REF_FB_CLASS_NAME = OsgiBeanReferenceFactoryBean.class.getName();
 	private static final String GENERATED_REF = AbstractReferenceDefinitionParser.GENERATED_REF;
 	private static final String PROMOTED_REF = AbstractReferenceDefinitionParser.PROMOTED_REF;
 	private static final String REGEX =

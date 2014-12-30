@@ -18,16 +18,18 @@ package org.springframework.osgi.test;
 
 import java.io.IOException;
 
+import junit.framework.TestCase;
+
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.osgi.context.ConfigurableOsgiBundleApplicationContext;
 import org.springframework.osgi.context.support.AbstractDelegatedExecutionApplicationContext;
 import org.springframework.osgi.context.support.OsgiBundleXmlApplicationContext;
-import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -38,8 +40,8 @@ import org.springframework.util.ObjectUtils;
  * @author Costin Leau
  * 
  */
-public abstract class AbstractOptionalDependencyInjectionTests extends AbstractDependencyInjectionSpringContextTests {
-
+public abstract class AbstractOptionalDependencyInjectionTests extends TestCase {
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	// The OSGi BundleContext (when executing the test as a bundle inside OSGi)
 	protected BundleContext bundleContext;
 

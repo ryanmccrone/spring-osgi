@@ -283,8 +283,8 @@ public final class OsgiServiceProxyFactoryBean extends AbstractServiceImporterPr
 		}
 	}
 
-	@Override
-	Cardinality getInternalCardinality() {
-		return (Availability.OPTIONAL.equals(getAvailability()) ? Cardinality.C_0__1 : Cardinality.C_1__1);
-	}
+//	@Override
+//	Cardinality getInternalCardinality() {
+//		return (Availability.OPTIONAL.equals(getAvailability()) ? Cardinality.C_0__1 : Cardinality.C_1__1);
+//	}
 }

@@ -221,8 +221,7 @@ public class OsgiServiceFactoryBean extends AbstractOsgiServiceExporter implemen
 
 		// sanity check
 		if (interfaces == null) {
-			if (AutoExport.DISABLED.equals(interfaceDetector)
-					|| DefaultInterfaceDetector.DISABLED.equals(interfaceDetector))
+			if (DefaultInterfaceDetector.DISABLED.equals(interfaceDetector))
 				throw new IllegalArgumentException(
 						"No service interface(s) specified and auto-export discovery disabled; change at least one of these properties.");
 			interfaces = new Class[0];
@@ -467,9 +466,9 @@ public class OsgiServiceFactoryBean extends AbstractOsgiServiceExporter implemen
 	 * @see ExportContextClassLoader
 	 * @deprecated As of Spring DM 2.0, replaced by {@link #setExportContextClassLoader(ExportContextClassLoaderEnum)}
 	 */
-	public void setContextClassLoader(ExportContextClassLoader ccl) {
+	public void setContextClassLoader(ExportContextClassLoaderEnum ccl) {
 		Assert.notNull(ccl);
-		this.contextClassLoader = ccl.getExportContextClassLoaderEnum();
+		this.contextClassLoader = ccl;
 	}
 
 	/**
@@ -526,21 +525,21 @@ public class OsgiServiceFactoryBean extends AbstractOsgiServiceExporter implemen
 	public void setTargetBeanName(String name) {
 		this.targetBeanName = name;
 	}
-
-	/**
-	 * Sets the strategy used for automatically publishing classes. This allows the exporter to use the target class
-	 * hierarchy and/or interfaces for registering the OSGi service. By default, autoExport is disabled
-	 * {@link AutoExport#DISABLED}.
-	 * 
-	 * @param classExporter class exporter used for automatically publishing service classes.
-	 * 
-	 * @see AutoExport
-	 * @deprecated
-	 */
-	public void setAutoExport(AutoExport classExporter) {
-		Assert.notNull(classExporter);
-		this.interfaceDetector = classExporter;
-	}
+//
+//	/**
+//	 * Sets the strategy used for automatically publishing classes. This allows the exporter to use the target class
+//	 * hierarchy and/or interfaces for registering the OSGi service. By default, autoExport is disabled
+//	 * {@link AutoExport#DISABLED}.
+//	 * 
+//	 * @param classExporter class exporter used for automatically publishing service classes.
+//	 * 
+//	 * @see AutoExport
+//	 * @deprecated
+//	 */
+//	public void setAutoExport(AutoExport classExporter) {
+//		Assert.notNull(classExporter);
+//		this.interfaceDetector = classExporter;
+//	}
 
 	/**
 	 * Sets the strategy used for automatically publishing classes. This allows the exporter to use the target class

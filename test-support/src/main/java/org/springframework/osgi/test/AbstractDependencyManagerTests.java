@@ -193,7 +193,7 @@ public abstract class AbstractDependencyManagerTests extends AbstractSynchronize
 
 		// filter bundles which are Tiger/JDK 1.5 specific
 		String sign = null;
-		if (JdkVersion.isAtLeastJava15()) {
+		if (JdkVersion.getMajorJavaVersion() >= JdkVersion.JAVA_15) {
 			sign = "-15";
 		}
 		else {

@@ -97,17 +97,20 @@ class TypeFactory {
 			return arguments;
 		}
 
+		
+		//type.getResolvableType()
 		// check if the class is parameterized
-		MethodParameter mp = type.getMethodParameter();
-		if (mp != null) {
-			Type targetType = GenericTypeResolver.getTargetType(mp);
+//		MethodParameter mp = type.getMethodParameter();
+//		if (mp != null) {
+		
+			Type targetType = type.getResolvableType().getType(); //GenericTypeResolver.getTargetType(mp);
 			if (!(targetType instanceof Class)) {
 				ReifiedType rType = getReifiedType(targetType);
 				arguments = new ArrayList<ReifiedType>(1);
 				arguments.add(rType);
 				return arguments;
 			}
-		}
+//		}
 
 		return Collections.emptyList();
 	}

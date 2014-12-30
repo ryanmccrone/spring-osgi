@@ -306,16 +306,16 @@ public class BundleFactoryBean implements FactoryBean<Bundle>, BundleContextAwar
 	public void setBundleContext(BundleContext context) {
 		bundleContext = context;
 	}
-
-	/**
-	 * Returns the action.
-	 * 
-	 * @return Returns the action
-	 * @deprecated As of Spring DM 2.0, replaced by {@link #getBundleAction()}
-	 */
-	public BundleAction getAction() {
-		return BundleAction.getBundleAction(action);
-	}
+//
+//	/**
+//	 * Returns the action.
+//	 * 
+//	 * @return Returns the action
+//	 * @deprecated As of Spring DM 2.0, replaced by {@link #getBundleAction()}
+//	 */
+//	public BundleAction getAction() {
+//		return BundleAction.getBundleAction(action);
+//	}
 
 	/**
 	 * Returns the bundle action.
@@ -326,15 +326,15 @@ public class BundleFactoryBean implements FactoryBean<Bundle>, BundleContextAwar
 		return action;
 	}
 
-	/**
-	 * Action to execute at startup.
-	 * 
-	 * @param action action to execute at startup
-	 * @deprecated As of Spring DM 2.0, replaced by {@link #setBundleAction(BundleAction)}
-	 */
-	public void setAction(BundleAction action) {
-		this.action = action.getBundleActionEnum();
-	}
+//	/**
+//	 * Action to execute at startup.
+//	 * 
+//	 * @param action action to execute at startup
+//	 * @deprecated As of Spring DM 2.0, replaced by {@link #setBundleAction(BundleAction)}
+//	 */
+//	public void setAction(BundleAction action) {
+//		this.action = action.getBundleActionEnum();
+//	}
 
 	/**
 	 * Action to execute at startup.
@@ -345,15 +345,15 @@ public class BundleFactoryBean implements FactoryBean<Bundle>, BundleContextAwar
 		this.action = action;
 	}
 
-	/**
-	 * Returns the destroyAction.
-	 * 
-	 * @return Returns the destroyAction
-	 * @deprecated As of Spring DM 2.0, replaced by {@link #getBundleDestroyAction()}
-	 */
-	public BundleAction getDestroyAction() {
-		return BundleAction.getBundleAction(destroyAction);
-	}
+//	/**
+//	 * Returns the destroyAction.
+//	 * 
+//	 * @return Returns the destroyAction
+//	 * @deprecated As of Spring DM 2.0, replaced by {@link #getBundleDestroyAction()}
+//	 */
+//	public BundleAction getDestroyAction() {
+//		return BundleAction.getBundleAction(destroyAction);
+//	}
 
 	/**
 	 * Returns the bundle destroy action.
@@ -363,15 +363,15 @@ public class BundleFactoryBean implements FactoryBean<Bundle>, BundleContextAwar
 		return destroyAction;
 	}
 
-	/**
-	 * Action to execute at shutdown.
-	 * 
-	 * @param action action to execute at shutdown
-	 * @deprecated As of Spring DM 2.0, replaced by {@link #setBundleDestroyAction(BundleActionEnum)}
-	 */
-	public void setDestroyAction(BundleAction action) {
-		this.destroyAction = action.getBundleActionEnum();
-	}
+//	/**
+//	 * Action to execute at shutdown.
+//	 * 
+//	 * @param action action to execute at shutdown
+//	 * @deprecated As of Spring DM 2.0, replaced by {@link #setBundleDestroyAction(BundleActionEnum)}
+//	 */
+//	public void setDestroyAction(BundleAction action) {
+//		this.destroyAction = action.getBundleActionEnum();
+//	}
 
 	/**
 	 * Action to execute at shutdown.

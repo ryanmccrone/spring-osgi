@@ -31,7 +31,6 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.osgi.TestUtils;
-import org.springframework.osgi.bundle.BundleAction;
 import org.springframework.osgi.bundle.BundleActionEnum;
 import org.springframework.osgi.bundle.BundleFactoryBean;
 import org.springframework.osgi.context.support.BundleContextAwareProcessor;

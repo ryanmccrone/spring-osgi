@@ -30,7 +30,6 @@ import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.BeanReferenceFactoryBean;
 import org.springframework.beans.factory.config.RuntimeBeanNameReference;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.config.TypedStringValue;
@@ -41,6 +40,8 @@ import org.springframework.beans.factory.support.ManagedProperties;
 import org.springframework.beans.factory.support.ManagedSet;
 import org.springframework.osgi.blueprint.reflect.SimpleCollectionMetadata.CollectionType;
 
+import backward.OsgiBeanReferenceFactoryBean;
+
 /**
  * Adapter between Spring {@link BeanMetadataElement} and OSGi's Blueprint {@link Value}.
  * 
@@ -49,7 +50,7 @@ import org.springframework.osgi.blueprint.reflect.SimpleCollectionMetadata.Colle
  */
 class ValueFactory {
 
-	private static final String BEAN_REF_FB_CLASS_NAME = BeanReferenceFactoryBean.class.getName();
+	private static final String BEAN_REF_FB_CLASS_NAME = OsgiBeanReferenceFactoryBean.class.getName();
 	private static final String BEAN_REF_NAME_PROP = "targetBeanName";
 
 	/**

@@ -37,6 +37,7 @@ import org.springframework.osgi.test.platform.OsgiPlatform;
 import org.springframework.osgi.util.OsgiBundleUtils;
 import org.springframework.osgi.util.OsgiPlatformDetector;
 import org.springframework.osgi.util.OsgiStringUtils;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
@@ -181,12 +182,12 @@ public abstract class AbstractOsgiTests extends AbstractOptionalDependencyInject
 		// add ConditionalTestCase behaviour
 
 		// getName will return the name of the method being run
-		if (isDisabledInThisEnvironment(getName())) {
-			recordDisabled();
-			logger.warn("**** " + getClass().getName() + "." + getName() + " disabled in this environment: "
-					+ "Total disabled tests=" + getDisabledTestCount());
-			return;
-		} else {
+//		if (isDisabledInThisEnvironment(getName())) {
+//			recordDisabled();
+//			logger.warn("**** " + getClass().getName() + "." + getName() + " disabled in this environment: "
+//					+ "Total disabled tests=" + getDisabledTestCount());
+//			return;
+//		} else {
 			prepareTestExecution();
 			try {
 				// invoke OSGi test run
@@ -195,7 +196,7 @@ public abstract class AbstractOsgiTests extends AbstractOptionalDependencyInject
 			} finally {
 				// nothing to clean up
 			}
-		}
+		//}
 	}
 
 	//

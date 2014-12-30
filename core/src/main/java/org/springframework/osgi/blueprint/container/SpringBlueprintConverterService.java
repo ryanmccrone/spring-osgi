@@ -111,8 +111,8 @@ public class SpringBlueprintConverterService implements ConversionService {
 			return result;
 		}
 
-		MethodParameter mp = targetType.getMethodParameter();
-		Class<?> tType = (mp != null && mp.getNestingLevel() > 1 ? null : targetType.getType());
+		//MethodParameter mp = targetType.getMethodParameter();
+		Class<?> tType = targetType.getType(); // (mp != null && mp.getNestingLevel() > 1 ? null : targetType.getType());
 
 		if (!targetType.isCollection() && !targetType.isArray() && !targetType.isMap()) {
 			if (type.size() > 0) {
@@ -132,7 +132,7 @@ public class SpringBlueprintConverterService implements ConversionService {
 		}
 
 		lazyInitConverter();
-		return typeConverter.convertIfNecessary(source, tType, targetType.getMethodParameter());
+		return typeConverter.convertIfNecessary(source, tType); //, targetType.getMethodParameter());
 	}
 
 	private void lazyInitConverter() {
